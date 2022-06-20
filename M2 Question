@@ -1,0 +1,273 @@
+What are the plugins and how to use them?
+How to override a class?
+What are events and observers?
+How to create a custom event in our own module?
+What are the service contracts?
+How to define new extension attributes?
+Where Extension attribute data is saved?
+How to create a console command?
+What is the EAV model of the database?
+What is indexer?
+What are the proxy classes?
+How to call third party API?
+How to create custom cron?
+how to create custom payment method?
+how to create custom shipping method?
+What is MSI?
+What is MSRP? (Manufacturer’s Suggested Retail Price)
+About Git How to resolve confilict
+About Database EAV
+What is EAV?
+How many tables create while creating EAV?
+what is inheritance?
+what is polymorphism?
+What is overloding and overriding
+
+Question and answer
+    Q:- What is proxy?
+    A:- flexibly manage your class dependencies (it's call dependency injection).using Proxy we can get information into the database, we can not set value.
+    
+    ---------------------------------------------------------
+    
+    Q:- What is mitation in graphql?
+    A:- You Create registration.php file
+        create etc/module.xml file
+        GraphQL queries are declared under etc/schema.graphqls
+        Create Resolver Class Model/Resolver/CustomFormInput.php
+        Create Data Provider Class in Model/CustomFormCheck.php
+         
+        
+        Explaintion of graphqls :-
+        type Mutation > declares Mutation operations of our module.
+        contactusFormSubmit > name of our Mutation.
+        ContactusInput > it is input value and type.
+        ContactusOutput > declares output message
+    
+    ---------------------------------------------------------
+    
+    Q:- How to create custom payment method?
+    A:- registration.php, under etc/module.xml, under adminhtml/system.xml, under etc/config.xml,  under etc/payment.xml
+        Create model file for under the model folder and extend the core payment method \Magento\Payment\Model\Method\Cc
+        and many other's file also you need to be create for display and calculate the payment method
+        
+        and for the online payment method you need to required define 2 method's authorize and capture.
+        
+    ---------------------------------------------------------    
+    
+    
+    Q:- Backend model, frontend model and resource model
+    A:- Source Model – a model class that serves to get existing values (stored in the db or somewhere else) for further displaying inside the setting’s field.
+    
+    Frontend Model – if you want to display some html respone on that time using frontend model you can showing HTML response.
+    as a rule, it’s a block’s class. Methods of this class return html of setting’s field. To be more specific, the block had to have method _getElementHtml() described inside the class which returns the raw html of setting’s field.
+    
+    Backend Model – Set some data before save or after save on that time we are calling backend model
+    
+    a class which allows to operate with configuration data on the different stages (save, load). It contains three major methods respectively for each event: _afterLoad(), _beforeSave() and _afterSave().
+    
+    ---------------------------------------------------------
+    
+    Q:- PHP code to find the duplicate values from an array
+    A:- using array_count_values mehtod of php we can get the duplicate value
+    
+    ---------------------------------------------------------
+    
+    Q:-How to configure RabbitMQ and how does it work?
+    A:- * Install rabbitMQ server configure in env.php file 
+        
+    ---------------------------------------------------------
+    
+    
+    Q:- Magento Design Patterns 
+    A:- * MODEL VIEW CONTROLLER(MVC) PATTERN
+            - Magento 2 uses Model-View-Controller (MVC) as the software architectural pattern, which is responsible mainly for organizing the entire system’s process structure at the coding level and establishing the means for the system to be flexible and extensible.
+        * FACTORY PATTERN OR FACTORY CLASSES
+            - The factory classes create a layer between the object manager and business code in Magento 2. It is a classes need not define explicitly as they are auto-generated.
+        * REGISTRY PATTERN
+        * SERVICE CONTRACT DESIGN PATTERN
+        * OBJECT MANAGER
+        * DEPENDENCY INJECTION
+            - The dependency injection is an alternative to Mage in Magento 1. It is a concepts of injecting the dependent object through external environment rather than creating them internally
+            - This helps in future modification or customization and testing becomes very easy by mocking required objects.
+    ---------------------------------------------------------
+    
+    
+    Q:- Optimization steps to make a website page speed faster?
+    A:- 
+        Step 1: Enable Flat Categories and Products
+        Step 2: Merge CSS and JS Files
+        Step 3: USE CDN (Content Delivery Network) 
+        Step 4: Caching
+        Step 5: Image Optimization
+        Step 6: Enable Compression
+        Step 7: Reduce Server Response Time
+        Step 8: Magento Updates
+        Step 9: Enable Varnish Cache
+        Step 10: Use Redis
+        Setp 11: Load balancer
+        Setp 12: enableing gzip on php level
+    
+    ---------------------------------------------------------    
+        
+    Q:- Have you create custom shipping method? how?
+    A:- registration.php, under etc/module.xml, etc/config.xml
+        under config.xml defind 
+        <default>
+            <carriers>
+                <simpleshipping>
+        and model and other's tag, model file you need to be extends and implements
+        class Shipping extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements \Magento\Shipping\Model\Carrier\CarrierInterface
+        
+        Create one more xml file under etc/adminhtml/system.xml definde configuration
+        Then run setup upgrade and other's command.
+    ----------------------------------------------------------
+    Q:- How to add custom fees in totals? 
+    A:- create sales.xml in you module etc folder, and define model class using this you can add custom fees in your totals
+    ----------------------------------------------------------
+    
+    ----------------------------------------------------------
+    Q:- section.xml 
+    A:- after ajax response you want update minicart, on that time you can use section.xml and update your response
+    ----------------------------------------------------------
+    
+    
+    ----------------------------------------------------------
+    Q:- Hot fixes?
+    A:- you need to fix some error in the core file or else somewhere, without override or create extension modification in exits files you can use patch of the magento and fix that part, that type of error we are calling hot fixes.
+    ----------------------------------------------------------
+    
+    
+    ----------------------------------------------------------
+    Q:- Design partterns magento 2
+    A:- MVC, Front Controller, Factory, singleton, Registry, Lazy loading, Module, Observer, Prototype
+    ----------------------------------------------------------
+    
+    
+    ----------------------------------------------------------
+    Q:- How many area in magento 2
+    A:- frontend, backend, cron, console and API
+    ----------------------------------------------------------
+    
+    
+    ----------------------------------------------------------
+    Q:- What is indexer?
+    A:- Put simply, indexing is the way Magento 2 converts refreshable data (products, categories, prices, etc.) to enhance the storefront performance.
+    
+    -> Can we able to create custom indexer?
+    (Yes), required file indexer.xml and mview.xml, in the indexer you need to define class and view_id, and mview.xml file you need add id, class and group, and the other tag of the subscriptions
+    under the subscriptions add table name and table entity_column
+    
+    ----------------------------------------------------------
+    
+    ----------------------------------------------------------
+    Q:- join in magento 2?
+    A:-
+    The first parameter will be a table name to join with, ca is the alias for the customer_address_entity.
+    The second Parameter is the conditions to join with other table. //’e.entity_id = ca.parent_id’
+    The third parameter is the list of columns required from the second(Join) table.
+    ----------------------------------------------------------
+    
+    
+    ----------------------------------------------------------
+    Q:-  What is the role of getDependency() and getAlias() methods in setup patch data file
+    A:-  
+    getDependencies() 
+    A patch may have several dependencies. When we place our dependencies, the function returns an array of class names and Magento will execute the patches we defined here first. However, some of your patches can be independent and can be installed in any order. In the AddCodeAttribution.php file, we didn't provide any dependencies, so we returned an empty array
+    
+    getAliases(): The place to identify the aliases for the patch. If a patch has changed its name and you don’t want it executed twice, its aliases can be returned in this function as an array. Our patch has no aliases so we will return an empty array.
+    
+    Magento will insert a record into the patch_list table in the database with the patch_name is the full name path of our patch class. 
+    ----------------------------------------------------------
+    Q:- Store and storeview and website
+    
+    Website: you can design various websites, for example, hats.com and pants.com. You can set different payment and shipping methods, goods can have different prices, currencies, and websites; have a separate client base
+    
+    Store: For each store, you can use different products and category structures. But all stores have the same currency and prices, payment and shipping methods, taxes, stock management system, customer accounts.
+    
+    Store View: for every store, you can create several store views. Magento store views are usually used for different languages and currencies. All store views have the same categories, but you can specify different product prices. 
+    -----------------------------------------------------------
+    Q:- Product Feed
+    A:- about the product feed many extension is available for that like amasty and other using that extension we can create product
+    
+    ---------------------------------------------------------
+    
+    
+    
+    Magento 2 migration m1 to m2 steps?
+    
+    > First dump the both database.sql file 
+    > Install data-migration tools using composer command which provided by devdocs as per current version
+    > configure the config.xml.dist file Data Migration Tool and cp that file with name config.xml
+    > In config.xml file change the database name, host, user name of the database, and crypt_key
+    > Add source tag add m1 details and in the destination add m2 details
+    > goto in the migration folder and select the map.xml file of the m1 
+    > In the map.xml file we can set ignore fileds move filed and others settings
+    > Then after start the migration with regular command with provided by the data-migration-tools 
+    
+    
+    
+    --------------------------------------------------
+    Q:- Magento 1 vs Magento 2: Top 10 Differences between M1 & M2 (2021)
+    A:- 
+    
+    1. Technical Stack
+    
+    Magento 1.x older edition was supported till PHP 5.5 version. Currently, Magento 2.x runs only on PHP 7 version with improved performance and security enhancements.
+    
+    Magento 2.x is built on top of the latest technology stack, including HTML5, CSS3, Knockout JS, RequireJS, LESS CSS preprocessor.
+    
+    Magento 1.x is built based on the Zend framework, whereas Magento 2.x is based on Symfony Framework
+    
+    
+    2. Command Line Interface
+    3. The composer as Package Manager
+    4. RequireJS and KnockoutJS integration
+    Magento 1.x used PrototypeJS library as a javascript framework.
+    Magento 2.x uses the RequireJS library for implementing the
+    Knockout JS (KO) javascript library that implements Model-View-View Model (MVVM) pattern.
+    
+    5. LESS CSS Preprocessor
+    Magento 2 uses LESS(stands for Leaner Style Sheets) CSS Preprocessor. With LESS, UI developers can write code in CSS-like language. The advantage of using LESS code is the UI Developer doesn’t have to worry about the vendor prefix and browser compatibility. It will be taken care of by the CSS Preprocessor.
+    
+    During runtime, LESS code will be converted and deployed as CSS code. This process is called static content deployment, where the JS and CSS will be deployed in the specified path.
+    
+    
+    
+    6. Built-in Responsive Web Design Support
+    Magento 2.x default installation comes with two default themes called Blank theme and Luma theme. Both themes come with the Responsive design Integrated. Using the Child Theme concept new theme can be created by keeping the Blank theme as the Base. UI development time is considerably reduced using this approach.
+    
+    7. Automatic Dependency Injection
+    Magento 2 architecture uses the object manager concept to implement automatic dependency injection.
+    A developer can specify the required objects in the constructor arguments, Magento will automatically instantiate the corresponding class and provide the object to use.
+    
+    
+    8. Cleaner Rewrites using Plugin System
+    Magento 1.x has the class rewrite/override feature; a module developer can completely redefine a base class by extending it to a child class.
+    However, there are a few problems with this approach. Once a class is extended, another module cannot extend the same base class.
+    
+    
+    To solve the above problem, Magento 2.x introduces a new concept called plugin, A plugin, or interceptor, is a class that modifies the behaviour of public class functions by intercepting a function call and running code before, after, or around that function call.
+    The above approach will rewrite the entire class. Still, the specified function behavior can be changed before/after the execution.
+    
+    Magento 2.x also provides the preference feature, similar to the old Magento 1.x rewrite.
+    
+    
+    10. Admin UI Component
+    Magento2 Admin Panel UI Interface is user-friendly and intuitive. UI Component is a new approach used to build the admin grids. One Advantage of this UI Component is once a Component is defined, it can reuse it in other places.
+    -------------------------------------------------------------------------------------------
+    
+    Q:- What is the Disadvantages of magento 2?
+    A:- 
+    
+    1. Complexity 
+        Magento system has a very large and complex structure. So, to build online store, you will need really strong and professional teams of developers and testers. 
+    2. Cost of development
+        Usually, Magento site development requires a large investment of time and knowledge, which justifies its high cost. 
+    3. Time
+        Customisation of Magento store takes longer than customisation of other eCommerse platforms. 
+    4. Hosting
+        You should know that Magento takes a great space so hosting on the shared servers could lead to slow speed of the website. As a solution, might be a robust dedicated hosting server which also will take a certain portion of your budget.
+    5. Cost
+        Magento community edition is free. But if you want to have more, Enterprise edition for example, don’t forget that it requires an additional annual fee.
+            
+    --------------------------------------------------------
